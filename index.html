@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Calculadora de IMC</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="script.js" type="text/js"></script>
+  <link rel="stylesheet" href="css.css">
+</head>
+
+<body>
+  <h1>Calculadora de IMC</h1>
+
+<fieldset style="background-color: aliceblue; width: 40.5%;  margin-left: auto;
+margin-right: auto; border: 2px solid black; border-radius: 5px;">
+  <label for="sexo">Sexo:</label>
+  <select id="sexo">
+    <option value="m">Masculino</option>
+    <option value="f">Feminino</option>
+  </select><br><br>
+
+  <label for="altura">Altura (em metros):</label>
+  <input type="number" id="altura"><br><br>
+
+  <label for="peso">Peso (em kg):</label>
+  <input type="number" id="peso"><br><br>
+
+  <button onclick="calcularIMC()">Calcular</button><br><br>
+
+  <div id="resultado"></div>
+  
+</fieldset>
+
+  <script>
+    function calcularIMC() {
+      var sexo = document.getElementById("sexo").value;
+      var altura = parseFloat(document.getElementById("altura").value);
+      var peso = parseFloat(document.getElementById("peso").value);
+
+      if (altura && peso) {
+        var imc = peso / (altura * altura);
+        var classificacao = "";
+
+        if (sexo === "m") {
+          if (imc < 18.5) {
+            classificacao = "Abaixo do peso";
+          } else if (imc < 26.4) {
+            classificacao = "Peso normal";
+          } else if (imc < 27.8) {
+            classificacao = "Marginalmente acima do peso";
+          } else if (imc < 31.1) {
+            classificacao = "Acima do peso ideal";
+          } else {
+            classificacao = "Obeso";
+          }
+        } else if (sexo === "f") {
+          if (imc < 19.1) {
+            classificacao = "Abaixo do peso";
+          } else if (imc < 25.8) {
+            classificacao = "Peso normal";
+          } else if (imc < 27.3) {
+            classificacao = "Marginalmente acima do peso";
+          } else if (imc < 32.3) {
+            classificacao = "Acima do peso ideal";
+          } else {
+            classificacao = "Obesa";
+          }
+        }
+
+        document.getElementById("resultado").innerHTML = "Seu IMC é " + imc.toFixed(2) + " e sua classificação é: " + classificacao;
+      }
+    }
+  </script>
+</body>
+
+</html>
